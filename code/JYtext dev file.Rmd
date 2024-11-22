@@ -1,0 +1,81 @@
+---
+title: "JYtext development file"
+author: "Jimmy Yu"
+date: "2024-11-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+Note that the `echo = FALSE` parameter  added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+# File start proper
+
+Read from a text file
+
+```{r "read delimited text strings from text file"}
+file_path <- "../data/Example_instructions.txt"
+file_path <- "../data/Example_negative.txt"
+txt_strings_from_file <- read.delim(file=file_path, header = FALSE)
+```
+
+```{r "formatting to lower and split text strings to words"}
+words_from_text_file <- c() #resulting string vector for all words in text file
+
+for (text_string in txt_strings_from_file) {
+  words_vector <- tolower(text_string) #convert all letters to lower case
+  words_vector <- unlist(strsplit(words_vector, split = " ")) #split string on space
+  words_vector <- unlist(strsplit(words_vector, split = ",")) #get rid of commas
+  #unlist() to get strsplit output from list
+  words_from_text_file <- c(words_from_text_file, words_vector)
+}
+```
+
+
+```{r "load positive and negative word vector"}
+#assume one word per row in word-list-file
+#output from read.delim() is a list so unlist() to turn output to char vector
+pos_words <- unlist(read.delim(file="../data/Positive words.txt", header = FALSE))
+neg_words <- unlist(read.delim(file="../data/Negative words.txt", header = FALSE))
+```
+
+```{r "compare text with pos and neg words"}
+pos_words_matches = c() #word vector for positive words matches
+neg_words_matches = c() #word vector for negative words matches
+
+# outer loop going through each word in text file
+for (current_word in words_from_text_file) {
+  #inner loop 1 for finding positive words
+  for (current_pos_word in pos_words) {
+    if (startsWith(current_word, current_pos_word)) {
+      pos_words_matches = c(pos_words_matches, current_word)
+      }
+  } #end inner loop
+  
+  #inner loop 2 for finding negative words
+  for (current_neg_word in neg_words) {
+    if (startsWith(current_word, current_neg_word)) {
+      neg_words_matches = c(neg_words_matches, current_word)
+    }
+  } #end inner loop
+} #end outer loop
+
+n_pos_words_found <- length(pos_words_matches)
+n_neg_words_found <- length(neg_words_matches)
+ratio_pos_words <- n_pos_words_found/(n_pos_words_found + n_neg_words_found)
+```
+
+```{r}
+jy_text_analyser("../data/Example_negative.txt")
+```
+
+

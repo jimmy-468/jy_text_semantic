@@ -1,0 +1,11 @@
+Package: JYtextAnalysis
+Title: Semantic Text Analysis Algorithm (One Line, Title Case)
+Version: 0.1
+Authors@R: 
+    person("Jimmy", "Yu", , "jimmy.yu@ki.se", role = c("aut", "cre"),
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: A simple semantic algorithm for summarising negative and positive words in a document. Package creation and coding exercise, an KI-course H7F6003 assignment (one paragraph).
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2

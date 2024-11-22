@@ -1,0 +1,24 @@
+Semantic search is a data searching technique that focuses on understanding the contextual meaning and intent behind a user's search query, rather than only matching keywords. In this exam task you will create a simple semantic algorithm for summarising negative and positive words in a document.
+
+You can use any document you want, but make sure it has the proper file type for the read.dellim() function, i.e., txt (depending on your software other file types can work). You can also use the example file downloadable HERE Download HEREOpen this document with ReadSpeaker docReader:
+
+image.png
+
+IMPORTANT! Try your code often to see if the last change worked. Use the help/documentation of functions as much as possible to understand the class, structure, and which arguments the functions expect.
+
+To separate the code, we want to create at least three function types, i) one that preprocesses the text, ii) one compares parts of the text to semantically labelled positive and negative words, and iii) a function that sums up the results of the positive and negative words. For this exam we will create a package that calculates if a text is positive or negative depending on the words we provide.
+
+Important to note is that the object returned from the read.delim() function, if you are using the example .txt data, provides a data frame with only one column composed of sentences of a fake diary.
+
+Start by creating a package with an appropriate name for its functionality.
+Provide documentation to the package, like authors, purpose of the package etc.
+If you intend to use text formatting packages that are not part of base R, make sure to put them as requirements for the package.
+For the first function use the read.delim() function with the appropriate file path to load a time series object to the environment.
+The first function should also format the text so that it can be used in a later function. First, we want to transform all uppercase letters to lowercase. After this we want to create a vector with all the words in the text as separate elements. One way of doing this is to use the strsplit() function to remove spaces (i.e., “ ”), and stopwords (e.g., “.”, “,”, “;”). Since the stopwords typically have a different meaning in R you will need to use escape characters or arguments to provide them as “fixed” text.
+Then create a vector of negative words and a vector of positive words. You can look at the document to get ideas, we are just trying to test our algorithm at the end, so they need not be evidence based.
+We then want to create a second function which takes one word vector (either the negative or positive) and compares them to the word vector we created from the document. This requires at least one loop.
+The negative and positive word vector should enable an unknown prefix or suffix for the word, for example nauseous and nauseated could both be viewed as negative words. Allowing the algorithm to present both with a suffix would simplify the vector. For example, the algorithm could be made to identify the character “*” as suffix, so that “nause*” would both identify nauseous and nauseated. For this one can use the startsWith() and endsWith() functions.
+The final function should use the second function to summarize the results of the positive and negative word matching and provide a value to the user. This value could for example be a ratio between positive and negative as well as the absolute number of positive and negative words.
+Provide appropriate documentation for each function in the package with explanations for the arguments and some example code.
+Upload the package to your Git and invite your peers to review the project.
+During the exam you may have only used base R functions. If you intend to work more with text and sentiment analysis have a look at these packages; tm, text, text2vec, and word2vec, and for tidy the tidytext package.
