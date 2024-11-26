@@ -15,7 +15,7 @@ The quiz/tasks markdownfiles (eg. day 6 tidyverse) are in the "QUIZ N TASKS"-fol
 1. Download the "jy_text_semantic-main.zip" using the green "< > Code"-button above
 2. Notice where the .zip file is stored
 3. In R, try following code:
-  + renv::install("<path to file folder>/jy_text_semantic-main.zip")
+  + renv::install("\<path to file folder\>/jy_text_semantic-main.zip")
   + library(jy_text_semantic-main)
   + jy_text_analyser("../data/Example_negative.txt")
 
