@@ -46,7 +46,7 @@ help(package = "JyTextSemantic")
 
 # access functions documentation
 ?JyTextSemantic::jy_text_analyser
-getAnywhere("jy_text_analyser")
+#getAnywhere("jy_text_analyser")
 
 #list functions and datasets
 ls("package:JyTextSemantic")
@@ -61,14 +61,131 @@ jy_text_analyser("../data/Example_instructions.txt")
 ```
 
 
+## Testing Sabina's package
+
+```{r sabina1}
+# Installing
+library(devtools) # Make sure that the devtools library is loaded
+install_github("https://github.com/Sabenl/ImageFilter.git")
+```
+JYcomment: Installation went smoothly. The last output is copied to below:
+```
+Installing package into ‘C:/Users/crooa/AppData/Local/R/win-library/4.3’
+(as ‘lib’ is unspecified)
+* installing *source* package 'ImageFilter' ...
+** using staged installation
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (ImageFilter)
+```
+
+```{r sabina2}
+# Activate and analyze package
+# Use Ctrl + Enter to run individual lines of code
+library(ImageFilter)
+
+# access package documentation
+packageDescription("ImageFilter")
+help(package = "ImageFilter")
+
+#list functions and datasets
+ls("package:ImageFilter")
+
+#list datasets in package
+data(package = "ImageFilter")
+
+# access functions documentation
+?any_color_filter
+?apply_any_color_filter
+?apply_color_filter
+?apply_cutoff_filter
+?apply_grayscale_filter
+?color_filter
+?convert_raw_to_bitmap
+?grayscale_filter
+?grayscale_filter_cutoff
+
+```
+JYcomment: All documentation in place, easy to understand.
+
+### Test run (of Sabinas package) 
+Using sample code adapted from readme-file on GitHub  
+
+```{r}
+# Load libraries
+library(ImageFilter)
+library(magick)
+```
+
+
+```{r}
+#Load the image
+#Assign the path to the image you want to use in the filter (replace with your file path or image name if in the working directory)
+image_path <- "../grp_peers_files/Test image-1.jpg"
+```
+JYcomment: I first tried changing working directory as I saw there was some file ops going on in the code, then realized I could change path
+
+```{r}
+#Apply the chosen filter to your image
+#Assign the filter function to an object to be able to print and save the image
+
+#Grayscale filter
+gray_image <- apply_grayscale_filter(image_path)
+#View the final image
+print(gray_image)
+#Save the final image as a JPEG, change path to the name and location desired
+image_write(gray_image, path = "../grp_peers_files/gray_image.jpg", format = "jpeg")
+```
+JYcomment: Worked fine. I see a greyscale image of cells on the Viewer pane. Got file output.
+
+
+```{r}
+#Cutoff filter to the grayscale vector (requires the grayscale filter to have been run first) 
+cutoff_image <- apply_cutoff_filter(image_path)
+#View the final image
+print(cutoff_image)
+#Save the final image as a JPEG, change path to the name and location desired.
+image_write(cutoff_image, path = "../grp_peers_files/cutoff_image.jpg", format = "jpeg")
+```
+JYcomment: Worked fine. I see a black-and-white image of cells on the Viewer pane. Got file output.
+
+
+```{r}
+#Red, green or blue filter. Insert color "red", "blue" or "green" and change the output_path name. 
+color_image <- apply_color_filter(image_path, color = "red")
+#View the final image
+print(color_image) 
+#Save the final image as a JPEG, change path to the name and location desired.
+image_write(color_image, path = "../grp_peers_files/color_image.jpg", format = "jpeg")
+```
+JYcomment: Worked fine. I see a red image of cells on the Viewer pane. Got file output.
+
+
+```{r}
+#Any color filter, by supplying RGB values (any_color = c(0-255, 0-255, 0-255))
+any_color_image <- apply_any_color_filter(image_path, any_color = c(255, 0, 255))
+#View the final image
+print(any_color_image)
+#Save the final image as a JPEG, change path to the name and location desired.
+image_write(any_color_image, path = "../grp_peers_files/any_color_image.jpg", format = "jpeg")
+```
+JYcomment: Worked fine. I see a magenta image of cells on the Viewer pane. Got file output.
+
+
 ## Testing Fabians's package
 
 ```{r fabian1}
 # Installing
 library(devtools) # Make sure that the devtools library is loaded
-install_github("https://github.com/AMindOfMetalAndWheels/SchleichExam1New.git");
+install_github("https://github.com/AMindOfMetalAndWheels/SchleichExam1New.git")
 ```
-Installation went smoothly
+JYcomment: Installation process already done previously, went smoothly
 
 ```{r fabian2}
 # Activate and analyze package
@@ -93,7 +210,83 @@ data(package = "SchleichExam1New")
 ?smooth_window
 ```
 
+JYcomment: All documentation in place. Instructions comprehensible.
+
+### Test run (of Fabians package) 
+Using sample code adapted from function help documentation
 
 ```{r fabian 3}
-SchleichExam1New::process_euclidean_data(inst/extdata/Example_window.csv')
+library(utils)
+library(ggplot2)
+library(testthat)
+library(SchleichExam1New)
 ```
+
+```{r}
+test_check("SchleichExam1New")
+```
+
+JYcomment: it says "No test files found", probably no dataset. Not a problem, I just download it from the course webpage and modify the file-read code below:
+
+```{r}
+# Load data
+my_data <- utils::read.csv('../grp_peers_files/Example_window.csv')
+```
+
+JYcomment: Worked fine, I see ```my_data``` as a df in Environment, 45573 obs of 5 vars.  
+Next up, some data transforms it seems
+
+```{r}
+# change column name X to Index
+names(my_data)[1]<-paste("Index")
+
+# Change time column
+my_data$time <- as.POSIXct(my_data$time)
+#subset data set for faster test
+my_data2 <- my_data[c(1:250), c(1:5)]
+```
+JYcomment: Ran w/o errors
+
+```{r}
+# Test euclidean
+SchleichExam1Slide::euclidean(my_data)
+# Store as data frame
+euclidean_data <- SchleichExam1Slide::euclidean(my_data)
+```
+JYcomment: got an error, probably old package name, I change it below:
+```{r}
+# Test euclidean and Store as data frame
+euclidean_data <- euclidean(my_data)
+```
+JYcomment: this chunk ran fine, I got a new df ```euclidean_data``` with dims [45573, 6]  
+Since the old package name seems to persist in ensuing code, so I've modified them too
+
+```{r}
+# Apply smooth_window function on raw data and on euclidean
+smooth_data <- smooth_window(my_data, window_size = 100)
+smooth_euclidean_data <- smooth_window(euclidean_data, window_size = 100)
+```
+JYcomment: code ran fine but  ```smooth_window() ``` took about 5-10s
+
+```{r}
+# Apply binary_window function on raw data and on euclidean
+binary_data <- binary_window(my_data, window_size = 100)
+binary_euclidean_data <- binary_window(euclidean_data, window_size = 100)
+binary__smooth_euclidean_data <- binary_window(smooth_euclidean_data, window_size = 100)
+```
+JYcomment: code ran fine, each function took about 5s
+
+```{r}
+# test the combination function
+process_euclidean_data(my_data, window_size = 100)
+my_ggplot_test <- process_euclidean_data(my_data, window_size = 1000)
+```
+JYcomment: code took about 10-20s, I got some empty output above, probably fine 
+excited to see the result...
+
+```{r}
+# plot combination function
+plot_euclidean_results(my_ggplot_test,include_mean = TRUE, include_binary = FALSE)
+```
+JYcomment: Yay! It worked! Graph looks awesome. It represents XYZ-acceleration as a acceleration-vector length (Euclidean) and a _smoothed_ curve of the Euclidian using sliding window method (Mean)
+
