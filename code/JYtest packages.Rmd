@@ -28,3 +28,13 @@ plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r "Jimmy's package}
+renv::install("../groupmates packages zip/jy_text_semantic-main.zip")
+library(jy_text_semantic)
+jy_text_analyser("../data/Example_negative.txt")
+```
+
+
+
