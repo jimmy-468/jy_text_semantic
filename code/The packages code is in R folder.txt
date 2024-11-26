@@ -1,0 +1,7 @@
+This "code" folder only contains markdown documents for developing and testing
+
+The packages code is in R folder:
+
+../R/jy_pos_neg_words.R
+../R/jy_text_analyser_main.R
+../R/jy_text_file_reader.R

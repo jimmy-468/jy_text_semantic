@@ -1,4 +1,4 @@
-Package: JYtextAnalysis
+Package: jy_text_semantic
 Title: Semantic Text Analysis Algorithm (One Line, Title Case)
 Version: 0.1
 Authors@R: 
