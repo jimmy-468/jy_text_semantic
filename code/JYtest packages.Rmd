@@ -31,16 +31,26 @@ Note that the `echo = FALSE` parameter was added to the code chunk to prevent pr
 
 
 ```{r "Jimmy's package}
+# Install from local...
 renv::install("../groupmates packages zip/jy_text_semantic-main.zip")
-library(jy_text_semantic)
+
+# ...OR install from GitHub
+library(devtools) # Make sure that the devtools library is loaded
+install_github("https://github.com/jimmy-468/jy_text_semantic.git")
+
+# Then run the code
+library(JyTextSemantic)
 jy_text_analyser("../data/Example_negative.txt")
 ```
 
 
 
 
-```{r "install direct from GitHub"}
+```{r "Fabian's package install"}
 library(devtools) # Make sure that the devtools library is loaded
 install_github("https://github.com/AMindOfMetalAndWheels/SchleichExam1New.git");
 ```
+```{r "Fabian's package run"}
+library(SchleichExam1New)
 
+```
