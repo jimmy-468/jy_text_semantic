@@ -57,6 +57,10 @@ data(package = "JyTextSemantic")
 
 ```{r jimmy4}
 # Then run the code
+sample_text_file <- system.file("data", "Example_negative.txt", 
+        package = "JyTextSemantic")
+jy_text_analyser(sample_text_file)
+
 jy_text_analyser("../data/Example_instructions.txt")
 ```
 

@@ -1,6 +1,6 @@
 Package: JyTextSemantic
 Title: Semantic Text Analysis Algorithm (One Line, Title Case)
-Version: 0.2
+Version: 0.3
 Authors@R: 
     person("Jimmy", "Yu", , "jimmy.yu@ki.se", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))

@@ -3,7 +3,7 @@
 #' Finds n positive and negative words and returns their ratio
 #' @param words_from_text_file a char vector of words from text file
 #'
-#' @return Ratio between positive and negative words
+#' @return vec_of_rat_pos_neg vector of 3 elements: as.numeric(c(ratio pos/neg words, n_pos_words, n_neg_words))
 #' @export
 #'
 #' @examples
@@ -47,11 +47,12 @@ jy_pos_neg_words <- function(words_from_text_file){
   n_pos_words_found <- length(pos_words_matches)
   n_neg_words_found <- length(neg_words_matches)
   ratio_pos_words <- n_pos_words_found/(n_pos_words_found + n_neg_words_found)
-  return(ratio_pos_words)
+  vec_of_rat_pos_neg <- c(ratio_pos_words, n_pos_words_found, n_neg_words_found)
+  return(vec_of_rat_pos_neg)
   # we can return other variables here of course, perhaps even in organized in an obj
 
   #VERBOSE reporting of results
-  print(paste("\n Positive words found:", as.character(n_pos_words_found)))
-  print(paste("\n Negative words found:", as.character(n_neg_words_found)))
-  print(paste("\n Ratio positive/negative words:", as.character(ratio_pos_words)))
+  print(paste("Positive words found:", as.character(n_pos_words_found)))
+  print(paste("Negative words found:", as.character(n_neg_words_found)))
+  print(paste("Ratio positive/negative words:", as.character(ratio_pos_words)))
 }

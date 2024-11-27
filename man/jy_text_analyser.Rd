@@ -10,7 +10,7 @@ jy_text_analyser(file_path)
 \item{file_path}{the file path to text file to be read (file-format must be "*.txt")}
 }
 \value{
-Ratio between positive and negative words
+Ratio between positive and negative words (numeric scalar)
 }
 \description{
 A (wrapper) function to read words from a text file, and find the ratio between positive and negative words

@@ -10,7 +10,7 @@ jy_pos_neg_words(words_from_text_file)
 \item{words_from_text_file}{a char vector of words from text file}
 }
 \value{
-Ratio between positive and negative words
+vec_of_rat_pos_neg vector of 3 elements: as.numeric(c(ratio pos/neg words, n_pos_words, n_neg_words))
 }
 \description{
 Finds n positive and negative words and returns their ratio
