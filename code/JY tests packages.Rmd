@@ -61,6 +61,7 @@ jy_text_analyser("../data/Example_instructions.txt")
 ```
 
 
+
 ## Testing Sabina's package
 
 ```{r sabina1}
