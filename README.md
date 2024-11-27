@@ -19,7 +19,8 @@ A student's GitHub repository done as a part of coding exercise, KI-course H7F60
   + ```renv::install("<path to file folder>/jy_text_semantic-main.zip")```
 
 ### 1b) ...or install directly from Github
-```library(devtools) # Make sure that the devtools library is loaded```  
+```library(usethis) # In order to use "devtools"-package below```
+```library(devtools) # In order to use "install_github"-function below```  
 ```install_github("https://github.com/jimmy-468/jy_text_semantic.git")```
 
 ### 2) Run the code
